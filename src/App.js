@@ -21,4 +21,4 @@ server.use((err, req, res, next) => {
     res.status(500).send("Error Catched by error handler.")
 })
 
-server.listen(8000, () => console.log("server is running on port 8000"))
+server.listen(process.env.PORT || 8000, () => console.log("server is running on port 8000"))
