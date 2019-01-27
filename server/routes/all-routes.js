@@ -6,27 +6,11 @@ var upload = require('../config/multer-config')
 
 module.exports = function (server) {
 
-  server.get("/test", (req, res) => {
-    const user = new Users ({name: 'Mudassir', email: "raheel@yahoo.com", balance: 2000});
-    user.save(console.log('user successfully saved in database'),(err, result) => {
-        if(err) return res.send(err)
-        res.send(result)
-    })
-  })
-
     server.get('/getAllUsers', (req, res) => {
-    
-        //   Users.find({name: 'Raheel'}, (err, user) => {
-    //       if (err) {
-    //           return res.json({success:false, err:err})
-    //       }
-    //       res.json({success: true, data: user })
-    //   })
-      
         Users.
             find({
-                name: { $in: ['Raheel', 'Mudassir', 'Ali'] },
-                balance: { $gt: 10, $lt: 100000 },
+                name: { $in: ['Talha', 'Test'] },
+                balance: { $gt: 10, $lt: 1000000 },
             }).
             limit(10).
             sort({ balance: 1 }).
@@ -39,7 +23,7 @@ module.exports = function (server) {
     })
 
     server.post('/addUser', (req, res) => {
-        var user = new Users({ name: req.body.name, email: req.body.email, balance: req.body.balance }) //Please explain
+        var user = new Users({ name: req.body.name, email: req.body.email, balance: req.body.balance })
         user.save((err, user) => {
             if (err) {
                 return res.json({ success: false, err: err })
